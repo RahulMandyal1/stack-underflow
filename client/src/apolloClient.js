@@ -4,7 +4,7 @@ import storage from './utils/localStorage';
 import backendUrl from './backendUrl';
 
 const httpLink = new HttpLink({
-  uri: backendUrl,
+  uri: `${backendUrl}/graphql`,
 });
 
 const authLink = setContext(() => {
