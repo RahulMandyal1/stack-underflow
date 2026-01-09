@@ -1,0 +1,31 @@
+services:
+  # Backend GraphQL Server
+  - type: web
+    name: stack-underflow-backend
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: MONGODB_URI
+        sync: false  # You'll need to set this in Render dashboard
+      - key: SECRET
+        sync: false  # You'll need to set this in Render dashboard
+
+  # Frontend React App
+  - type: web
+    name: stack-underflow-frontend
+    env: static
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: ./client/build
+    envVars:
+      - key: REACT_APP_BACKEND_URL
+        fromService:
+          type: web
+          name: stack-underflow-backend
+          property: host
+
