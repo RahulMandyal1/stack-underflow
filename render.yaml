@@ -24,8 +24,5 @@ services:
     staticPublishPath: ./client/build
     envVars:
       - key: REACT_APP_BACKEND_URL
-        fromService:
-          type: web
-          name: stack-underflow-backend
-          property: host
+        value: https://stack-underflow-backend-o4uk.onrender.com
 
